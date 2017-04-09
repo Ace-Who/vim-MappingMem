@@ -68,5 +68,3 @@ endfunction
 
 let &cpoptions = s:save_cpoptions
 unlet s:save_cpoptions
-
-

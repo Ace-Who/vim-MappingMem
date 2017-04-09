@@ -5,8 +5,8 @@ Save or load a key mapping.
 ## Usage
 
 ```vimL
-:SaveMapping {lhs} [, {mode}]
-:LoadMapping {lhs} [, {mode} [, {buffer}]]
+:SaveMapping {lhs}[, {mode}]
+:LoadMapping {lhs}[, {mode}[, {buffer}]]
 ```
 
 - `{lhs}` is the left-hand side of a mapping.
