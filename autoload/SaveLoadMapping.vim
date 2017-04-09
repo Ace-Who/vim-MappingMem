@@ -15,7 +15,7 @@ function! SaveLoadMapping#Save(lhs, ...)
     let l:saves[a:lhs] = {}
   endif
   let l:save = l:saves[a:lhs]
-  let l:mode = get(a:000, 0, 'n')
+  let l:mode = get(a:000, 0, '')
   let l:maparg = maparg(a:lhs, l:mode, 0, 1)
   if len(l:maparg) > 0
     if !exists('l:save[l:mode]')
@@ -33,7 +33,7 @@ function! SaveLoadMapping#Save(lhs, ...)
 endfunction
 
 function! SaveLoadMapping#Load(lhs, ...)
-  let l:mode = get(a:000, 0, 'n')
+  let l:mode = get(a:000, 0, '')
   let l:buffer = get(a:000, 1, bufnr('%'))
   " Check mapping save existence. If buffer not specified and local mapping
   " save not existing, also check the global one.
