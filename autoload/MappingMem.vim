@@ -6,7 +6,7 @@ let s:save_cpoptions = &cpoptions
 set cpoptions&vim
 " }}}
 
-function! SaveLoadMapping#Save(lhs, ...) "{{{
+function! MappingMem#Save(lhs, ...) "{{{
   let l:mode = get(a:000, 0, '')
   let l:maparg = maparg(a:lhs, l:mode, 0, 1)
   if len(l:maparg) == 0
@@ -15,11 +15,11 @@ function! SaveLoadMapping#Save(lhs, ...) "{{{
     echohl NONE
     return 0
   endif
-  if !exists('g:SaveLoadMapping_Saves')
-    let g:SaveLoadMapping_Saves = {}
+  if !exists('g:MappingMem_Saves')
+    let g:MappingMem_Saves = {}
   endif
   " Short name for internal use within this function
-  let l:saves = g:SaveLoadMapping_Saves
+  let l:saves = g:MappingMem_Saves
   unlockvar! l:saves
   if !exists('l:saves[a:lhs]')
     let l:saves[a:lhs] = {}
@@ -33,14 +33,14 @@ function! SaveLoadMapping#Save(lhs, ...) "{{{
   return len(l:maparg) > 0 ? 1 : 0
 endfunction "}}}
 
-function! SaveLoadMapping#Load(lhs, ...) "{{{
+function! MappingMem#Load(lhs, ...) "{{{
   let l:mode = get(a:000, 0, '')
   let l:bufGiven = a:0 > 1
   let l:buffer = get(a:000, 1, bufnr('%'))
-  let l:found = exists('g:SaveLoadMapping_Saves[a:lhs][l:mode][l:buffer]')
+  let l:found = exists('g:MappingMem_Saves[a:lhs][l:mode][l:buffer]')
   if !l:found && !l:bufGiven
     let l:buffer = 'global'
-    let l:found = exists('g:SaveLoadMapping_Saves[a:lhs][l:mode][l:buffer]')
+    let l:found = exists('g:MappingMem_Saves[a:lhs][l:mode][l:buffer]')
   endif
   if !l:found
     echohl Error
@@ -48,7 +48,7 @@ function! SaveLoadMapping#Load(lhs, ...) "{{{
     echohl NONE
     return 0
   endif
-  let l:maparg = g:SaveLoadMapping_Saves[a:lhs][l:mode][l:buffer]
+  let l:maparg = g:MappingMem_Saves[a:lhs][l:mode][l:buffer]
   let l:mapcmd = join([
   \ l:mode . (l:maparg.noremap ? 'noremap' : 'map')
   \ , l:maparg.buffer ? '<buffer>' : ''

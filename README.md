@@ -1,6 +1,7 @@
-# vim-SaveLoadMapping
+# vim-MappingMem
 
-Save or load a key mapping.
+Save or load key mappings. Mappings for different modes or buffers are stored
+together.
 
 ## Usage
 
